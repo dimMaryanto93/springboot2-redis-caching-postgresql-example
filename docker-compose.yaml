@@ -1,0 +1,27 @@
+version: '3.7'
+services:
+  postgres:
+    image: tabeldata.ip-dynamic.com:8088/postgres:9.6
+    environment:
+      - POSTGRES_PASSWORD=passwordnyaPostgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - springboot-data-network
+  redis:
+    image: tabeldata.ip-dynamic.com:8088/redis:5.0.6
+    ports:
+      - 6379:6379
+    volumes:
+      - redis_data:/data
+    networks:
+      - springboot-data-network
+volumes:
+  postgres_data:
+  redis_data:
+networks:
+  springboot-data-network:
